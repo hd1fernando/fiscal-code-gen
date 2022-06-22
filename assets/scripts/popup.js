@@ -1,7 +1,123 @@
 document.getElementById('generate')
-    .addEventListener("click", generateFiscalCode);
+    .addEventListener("click", generateIVA);
+
+document.getElementById('generateFC')
+    .addEventListener("click", validateFiscalCode);
 
 function validateFiscalCode() {
+    // ISZROX05E42G359S
+    let fiscalCode = document.getElementById('fiscalCode').value;
+    fiscalCode = fiscalCode.trim();
+
+    let s = 0;
+    if (fiscalCode.length != 16) {
+        console.log('false')
+        return false;
+    }
+
+    let map = {
+        "0": 1,
+        "1": 0,
+        "2": 5,
+        "3": 7,
+        "4": 9,
+        "5": 13,
+        "6": 15,
+        "7": 17,
+        "8": 19,
+        "9": 21,
+        "A": 1,
+        "B": 0,
+        "C": 5,
+        "D": 7,
+        "E": 9,
+        "F": 13,
+        "G": 15,
+        "H": 17,
+        "Eu": 19,
+        "J": 21,
+        "K": 2,
+        "L": 4,
+        "M": 18,
+        "N": 20,
+        "OU": 11,
+        "P": 3,
+        "Q": 6,
+        "R": 8,
+        "S": 12,
+        "T": 14,
+        "U": 16,
+        "V": 10,
+        "W": 22,
+        "X": 25,
+        "S": 24,
+        "Z": 23,
+    };
+
+    let alphabet = [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z'
+    ]
+
+    for (let i = 0; i < 16; i = i + 2) {
+        let number = fiscalCode[i];
+
+        let element = map[number];
+        s += element;
+    }
+
+    for (let i = 1; i < 15; i = i + 2) {
+        let isNumber = Number(fiscalCode[i]) == fiscalCode[i];
+
+        if (isNumber) {
+            let element = parseInt(fiscalCode[i]);
+            s += element;
+        } else {
+            var charNum = alphabet.indexOf(fiscalCode[i]);
+            let element = parseInt(charNum);
+            s += element;
+        }
+    }
+
+    console.log('s=', s)
+
+    let r = s % 26;
+    console.log('r=', r);
+
+    let c = alphabet[r];
+    console.log('c=', c);
+
+    if (fiscalCode[15] == c)
+        console.log('valido');
+    else
+        console.log('invalido');
+}
+
+function validateIVA() {
 
     let fiscalCode = document.getElementById("fiscalCode").value.trim();
     console.log('fc=', fiscalCode)
@@ -32,7 +148,7 @@ function validateFiscalCode() {
     document.getElementById('isValid').textContent = result;
 }
 
-function generateFiscalCode() {
+function generateIVA() {
 
     let initial = '';
     for (let i = 0; i < 10; i++) {
