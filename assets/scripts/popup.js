@@ -2,7 +2,9 @@ document.getElementById('generate')
     .addEventListener("click", generateIVA);
 
 document.getElementById('generateFC')
-    .addEventListener("click", generateFiscalCode);
+    .addEventListener("click", () => {
+        document.getElementById('fiscalCode').value = generateFiscalCode();
+    });
 
 let map = {
     "0": 1,
@@ -78,7 +80,7 @@ function validateFiscalCode(e) {
 
     let s = 0;
     if (fiscalCode.length != 16) {
-        console.log('false')
+        console.log('maior=', fiscalCode)
         return false;
     }
 
@@ -147,8 +149,8 @@ function generateFiscalCode() {
         'X',
         'Z',
     ]
-    // SSSSS00S00SS000S
-    for (let i = 0; i < 5; i++) {
+    // SSSSSS00S00S000S
+    for (let i = 0; i < 6; i++) {
         let randon = Math.floor(Math.random() * (localAlphabet.length - 1));
         fiscalCode += localAlphabet[randon];
     }
@@ -164,16 +166,12 @@ function generateFiscalCode() {
 
     randon = Math.floor(Math.random() * (localAlphabet.length - 1));
     fiscalCode += localAlphabet[randon];
-    randon = Math.floor(Math.random() * (localAlphabet.length - 1));
-    fiscalCode += localAlphabet[randon];
-
 
     for (let i = 0; i < 3; i++) {
         fiscalCode += Math.floor(Math.random() * 10);
     }
 
     fiscalCode = fiscalCode.trim();
-    // NAQTU98U02BW206Z
 
     let s = 0;
     for (let i = 0; i <= 15; i = i + 2) {
@@ -198,10 +196,9 @@ function generateFiscalCode() {
 
     let r = s % 26;
 
-    let c = localAlphabet[r];
-    document.getElementById('fiscalCode').value = fiscalCode + c;
+    let c = alphabet[r];
 
-    validateFiscalCode(fiscalCode + c)
+    return fiscalCode + c;
 }
 
 function validateIVA() {
