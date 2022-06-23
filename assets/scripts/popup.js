@@ -1,5 +1,7 @@
 document.getElementById('generate')
-    .addEventListener("click", generateIVA);
+    .addEventListener("click", () => {
+        document.getElementById('fiscalCode').value = generateIVA();
+    });
 
 document.getElementById('generateFC')
     .addEventListener("click", () => {
@@ -260,5 +262,5 @@ function generateIVA() {
 
     let generateFiscalCode = initial + c;
 
-    document.getElementById('fiscalCode').value = generateFiscalCode;
+    return generateFiscalCode;
 }
