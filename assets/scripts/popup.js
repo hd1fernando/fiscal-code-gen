@@ -4,8 +4,8 @@ document.getElementById('generate')
 document.getElementById('generateFC')
     .addEventListener("click", generateFiscalCode);
 
-function validateFiscalCode() {
-    let fiscalCode = document.getElementById('fiscalCode').value;
+function validateFiscalCode(e) {
+    let fiscalCode = e;
     fiscalCode = fiscalCode.trim();
 
     let s = 0;
@@ -96,7 +96,7 @@ function validateFiscalCode() {
             let element = parseInt(fiscalCode[i]);
             s += element;
         } else {
-            var charNum = alphabet.indexOf(fiscalCode[i]);
+            let charNum = alphabet.indexOf(fiscalCode[i]);
             let element = parseInt(charNum);
             s += element;
         }
@@ -184,28 +184,31 @@ function generateFiscalCode() {
         'V',
         'W',
         'X',
+        'Z',
         'Y',
-        'Z'
     ]
-
+    // SSSSS00S00SS000S
     for (let i = 0; i < 5; i++) {
-        var randon = Math.floor(Math.random() * alphabet.length);
+        let randon = Math.floor(Math.random() * (alphabet.length - 1));
         fiscalCode += alphabet[randon];
     }
 
     fiscalCode += Math.floor(Math.random() * 10);
     fiscalCode += Math.floor(Math.random() * 10);
 
-    var randon = Math.floor(Math.random() * alphabet.length);
+    let randon = Math.floor(Math.random() * (alphabet.length - 1));
     fiscalCode += alphabet[randon];
 
     fiscalCode += Math.floor(Math.random() * 10);
     fiscalCode += Math.floor(Math.random() * 10);
 
-    var randon = Math.floor(Math.random() * alphabet.length);
+    randon = Math.floor(Math.random() * (alphabet.length - 1));
+    fiscalCode += alphabet[randon];
+    randon = Math.floor(Math.random() * (alphabet.length - 1));
     fiscalCode += alphabet[randon];
 
-    for (let i = 0; i <= 3; i++) {
+
+    for (let i = 0; i < 3; i++) {
         fiscalCode += Math.floor(Math.random() * 10);
     }
 
@@ -218,6 +221,8 @@ function generateFiscalCode() {
         let number = fiscalCode[i];
 
         let element = map[number];
+        console.log('number=', number)
+        console.log('element=', element)
         s += element;
     }
 
@@ -228,16 +233,21 @@ function generateFiscalCode() {
             let element = parseInt(fiscalCode[i]);
             s += element;
         } else {
-            var charNum = alphabet.indexOf(fiscalCode[i]);
+            let charNum = alphabet.indexOf(fiscalCode[i]);
             let element = parseInt(charNum);
             s += element;
         }
     }
 
+    console.log('s=', s)
+
     let r = s % 26;
+    console.log('r=', r)
 
     let c = alphabet[r];
     document.getElementById('fiscalCode').value = fiscalCode + c;
+
+    validateFiscalCode(fiscalCode + c)
 }
 
 function validateIVA() {
