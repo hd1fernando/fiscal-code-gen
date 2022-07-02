@@ -1,17 +1,27 @@
 document.getElementById('generate')
     .addEventListener("click", () => {
-        document.getElementById('fiscalCode').value = generateIVA();
+        let iva = generateIVA();
+        document.getElementById('fiscalCode').value = iva;
+        copyToClipboard(iva);
     });
 
 document.getElementById('generateFC')
     .addEventListener("click", () => {
-        document.getElementById('fiscalCode').value = generateFiscalCode();
+        let fiscalCode = generateFiscalCode();
+        document.getElementById('fiscalCode').value = fiscalCode;
+        copyToClipboard(fiscalCode);
     });
 
 document.getElementById('generatePhoneNumber')
     .addEventListener("click", () => {
-        document.getElementById('fiscalCode').value = generatePhoneNumber();
+        let phone = generatePhoneNumber();
+        document.getElementById('fiscalCode').value = phone;
+        copyToClipboard(phone);
     });
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+}
 
 let map = {
     "0": 1,
@@ -120,9 +130,9 @@ function validateFiscalCode(e) {
     console.log('c=', c);
 
     if (fiscalCode[15] == c)
-        console.log('valido');
+        console.log('valid');
     else
-        console.log('invalido');
+        console.log('invalid');
 }
 
 function generateFiscalCode() {
@@ -230,13 +240,13 @@ function validateIVA(e) {
     let r = s % 10;
     let c = parseInt(fiscalCode[10]);
 
-    let result = 'inválido';
+    let result = 'invalid';
     if (r == 0 && c == 0)
         result = 'valid'
     else if (10 - r == c)
         result = 'valid'
 
-    console.log('IVA: ',result);
+    console.log('IVA: ', result);
 }
 
 function generateIVA() {
