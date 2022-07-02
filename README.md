@@ -4,7 +4,16 @@
 
 # fiscal-code-gen
 
-A chrome extension that generate fiscal code
+A chrome extension that generates fiscal code and phone numbers
+
+![sample](assets/img/sample.png)
+
+# How to use
+1. Download de latest tag.
+2. Unzip.
+3. Enable develop mode on Chrome.
+4. Load the unzipped folder.
+
 
 # References:
 - https://www-icosaedro-it.translate.goog/cf-pi/?_x_tr_sch=http&_x_tr_sl=it&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp
