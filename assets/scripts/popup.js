@@ -208,9 +208,9 @@ function generateFiscalCode() {
     return fiscalCode + c;
 }
 
-function validateIVA() {
+function validateIVA(e) {
 
-    let fiscalCode = document.getElementById("fiscalCode").value.trim();
+    let fiscalCode = e;
     console.log('fc=', fiscalCode)
 
     let s = 0;
@@ -232,19 +232,16 @@ function validateIVA() {
 
     let result = 'inválido';
     if (r == 0 && c == 0)
-        result = 'valido'
+        result = 'valid'
     else if (10 - r == c)
-        result = 'valido'
+        result = 'valid'
 
-    document.getElementById('isValid').textContent = result;
+    console.log('IVA: ',result);
 }
 
 function generateIVA() {
 
-    let initial = '';
-    for (let i = 0; i < 10; i++) {
-        initial += Math.floor(Math.random() * 10);
-    }
+    let initial = new RandExp(/^[0-9]{10}/).gen();
     initial = initial.trim();
 
     let s = 0;
@@ -271,7 +268,6 @@ function generateIVA() {
 }
 
 function generatePhoneNumber() {
-    // +393xxxxxxxxx: from abroad, both before and after 2001.
     let newNumber = new RandExp(/^393[0-9]{9}/).gen();
     return newNumber;
 }
