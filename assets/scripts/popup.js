@@ -8,6 +8,11 @@ document.getElementById('generateFC')
         document.getElementById('fiscalCode').value = generateFiscalCode();
     });
 
+document.getElementById('generatePhoneNumber')
+    .addEventListener("click", () => {
+        document.getElementById('fiscalCode').value = generatePhoneNumber();
+    });
+
 let map = {
     "0": 1,
     "1": 0,
@@ -263,4 +268,10 @@ function generateIVA() {
     let generateFiscalCode = initial + c;
 
     return generateFiscalCode;
+}
+
+function generatePhoneNumber() {
+    // +393xxxxxxxxx: from abroad, both before and after 2001.
+    let newNumber = new RandExp(/^393[0-9]{9}/).gen();
+    return newNumber;
 }
