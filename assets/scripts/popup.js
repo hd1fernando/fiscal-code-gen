@@ -251,7 +251,12 @@ function validateIVA(e) {
 
 function generateIVA() {
 
-    let initial = new RandExp(/^[0-9]{10}/).gen();
+    let initial = '';
+
+    for (let i = 0; i < 10; i++) {
+        initial += Math.floor(Math.random() * 10);
+    }
+
     initial = initial.trim();
 
     let s = 0;
@@ -278,6 +283,9 @@ function generateIVA() {
 }
 
 function generatePhoneNumber() {
-    let newNumber = new RandExp(/^393[0-9]{9}/).gen();
+    let min = 111111111;
+    let max = 999999999;
+    let rand = Math.floor(Math.random() * (max - min + 1)) + min;
+    let newNumber = '393' + rand;
     return newNumber;
 }
