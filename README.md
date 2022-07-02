@@ -9,7 +9,7 @@ A chrome extension that generates fiscal code and phone numbers
 ![sample](assets/img/sample.png)
 
 # How to use
-1. Download de latest tag.
+1. [Download](https://github.com/hd1fernando/fiscal-code-gen/tags) de latest tag.
 2. Unzip.
 3. Enable develop mode on Chrome.
 4. Load the unzipped folder.
